@@ -58,3 +58,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+Thumbs.db
+Roll-A-Ball/Library/
+Roll-A-Ball/Temp/
