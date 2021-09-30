@@ -15,6 +15,10 @@ public class PlayerController : MonoBehaviour
     private float movementX;
     private float movementY;
     public GameObject winTextObject;
+    private bool jump = false;
+    public float jumpHeight = 100;
+    private int jumpTimerMax = 10;
+    private int jumpTimerCount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +52,17 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
         rb.AddForce(movement * speed);
+        if (jump && jumpTimerCount < jumpTimerMax)
+        {
+            Vector3 jumping = new Vector3(0.0f, jumpHeight, 0.0f);
+            rb.AddForce(jumping);
+            jumpTimerCount++;
+        }
+        else
+        {
+            jump = false;
+            jumpTimerCount = 0;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -57,6 +72,9 @@ public class PlayerController : MonoBehaviour
             other.gameObject.SetActive(false);
             count += 1;
             SetCountText();
+        } else if (other.gameObject.CompareTag("Jump"))
+        {
+            jump = true;
         }
         
     }
