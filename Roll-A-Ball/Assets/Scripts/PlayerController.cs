@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public GameObject winTextObject;
     private bool jump = false;
     public float jumpHeight = 100;
-    private int jumpTimerMax = 10;
+    private int jumpTimerMax = 60;
     private int jumpTimerCount = 0;
 
     // Start is called before the first frame update
