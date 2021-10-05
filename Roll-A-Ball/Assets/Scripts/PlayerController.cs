@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private float movementX;
     private float movementY;
     public GameObject winTextObject;
+    public GameObject loseTextObject;
     private bool jump = false;
     public float jumpHeight = 100;
     private int jumpTimerMax = 60;
@@ -29,8 +30,7 @@ public class PlayerController : MonoBehaviour
         count = 0;
         SetCountText();
         winTextObject.SetActive(false);
-
-
+        loseTextObject.SetActive(false);
     }
 
     void OnMove(InputValue movementValue)
@@ -44,10 +44,6 @@ public class PlayerController : MonoBehaviour
     void SetCountText()
     {
         countText.text = "Count: " + count.ToString();
-        if (count >= 12)
-        {
-            winTextObject.SetActive(true);
-        }
     }
 
     void FixedUpdate() 
@@ -74,12 +70,20 @@ public class PlayerController : MonoBehaviour
             other.gameObject.SetActive(false);
             count += 1;
             SetCountText();
-        } else if (other.gameObject.CompareTag("Jump"))
+        }
+        else if (other.gameObject.CompareTag("Jump"))
         {
             jump = true;
-        } else if (other.gameObject.CompareTag("Respawn"))
+        }
+        else if (other.gameObject.CompareTag("Respawn"))
         {
             player.SetActive(false);
+            loseTextObject.SetActive(true);
+
+        }
+        else if (other.gameObject.CompareTag("Finish"))
+        {
+            winTextObject.SetActive(true);
         }
         
     }
