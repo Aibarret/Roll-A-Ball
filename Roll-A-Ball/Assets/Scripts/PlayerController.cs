@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 0;
     public TextMeshProUGUI countText;
+    public GameObject player;
 
     private Rigidbody rb;
     private int count;
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public float jumpHeight = 100;
     private int jumpTimerMax = 60;
     private int jumpTimerCount = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -75,6 +77,9 @@ public class PlayerController : MonoBehaviour
         } else if (other.gameObject.CompareTag("Jump"))
         {
             jump = true;
+        } else if (other.gameObject.CompareTag("Respawn"))
+        {
+            player.SetActive(false);
         }
         
     }
